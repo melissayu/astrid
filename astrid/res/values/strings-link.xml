@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="link_button_label">Call Astrid!</string>
+	<string name="link_control_title">Need to call someone when the task is finished?</string>
+	<string name="link_control_button">Select him or her here.</string>
+</resources>

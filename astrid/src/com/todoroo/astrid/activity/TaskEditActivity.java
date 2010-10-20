@@ -64,6 +64,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import at.tomtasche.astrid.link.contact.LinkContactControlSet;
 
 import com.timsu.astrid.R;
 import com.todoroo.andlib.data.Property.StringProperty;
@@ -122,6 +123,7 @@ public final class TaskEditActivity extends TabActivity {
 
     @SuppressWarnings("unused")
     private static final int REQUEST_CODE_OPERATION = 0;
+    public static final int REQUEST_CODE_CALL_ASTRID = 42;
 
     // --- menu codes
 
@@ -261,6 +263,7 @@ public final class TaskEditActivity extends TabActivity {
                         }
 
                         if(addOnService.hasPowerPack()) {
+                            controls.add(new LinkContactControlSet(TaskEditActivity.this, addonsAddons));
                             controls.add(new GCalControlSet(TaskEditActivity.this, addonsAddons));
                             controls.add(new TimerControlSet(TaskEditActivity.this, addonsAddons));
                             controls.add(new AlarmControlSet(TaskEditActivity.this, addonsAddons));
@@ -410,6 +413,20 @@ public final class TaskEditActivity extends TabActivity {
 
         if(taskService.save(model) && title.getText().length() > 0)
             showSaveToast(toast.toString());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_CALL_ASTRID && data != null) {
+            // ((CallAstridControlSet) controls.get(0)).contactSelected(data);
+            for (TaskEditControlSet controlSet : controls) {
+                if (LinkContactControlSet.class.isInstance(controlSet)) {
+                    ((LinkContactControlSet) controlSet).contactSelected(data);
+                }
+            }
+        }
     }
 
     @Override
