@@ -16,7 +16,7 @@ import com.todoroo.astrid.api.AstridApiConstants;
  *
  */
 public class LinkContactPlugin extends BroadcastReceiver {
-    static final String IDENTIFIER = "callAstrid"; //$NON-NLS-1$
+    static final String IDENTIFIER = "linkContact"; //$NON-NLS-1$
 
     @Override
     @SuppressWarnings("nls")

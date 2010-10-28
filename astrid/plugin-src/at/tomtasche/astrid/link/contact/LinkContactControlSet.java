@@ -10,21 +10,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.timsu.astrid.R;
+import com.todoroo.andlib.data.TodorooCursor;
 import com.todoroo.andlib.service.DependencyInjectionService;
 import com.todoroo.astrid.activity.TaskEditActivity;
 import com.todoroo.astrid.activity.TaskEditActivity.TaskEditControlSet;
+import com.todoroo.astrid.data.Metadata;
 import com.todoroo.astrid.data.Task;
 
 @SuppressWarnings("deprecation")
 public class LinkContactControlSet implements TaskEditControlSet {
     private final Button selectContact;
-    private final Activity activity;
     private String name;
+    private final LinkContactService contactService = LinkContactService.getInstance();
 
     public LinkContactControlSet(final Activity activity, ViewGroup parent) {
         DependencyInjectionService.getInstance().inject(this);
 
-        this.activity = activity;
         LayoutInflater.from(activity).inflate(R.layout.link_contact_control, parent, true);
 
         selectContact = (Button) activity.findViewById(R.id.select_contact);
@@ -46,16 +47,22 @@ public class LinkContactControlSet implements TaskEditControlSet {
 
     @Override
     public void readFromTask(Task task) {
-        String temp = task.getValue(Task.LINKED_CONTACT);
-        if (selectContact.getText().equals(activity.getResources().getString(R.string.gcal_TEA_showCalendar_label)) && !"".equals(temp)) { //$NON-NLS-1$
-            selectContact.setText(temp);
-            name = temp;
+        TodorooCursor<Metadata> cursor = contactService.getContact(task.getId());
+        if (cursor == null) return;
+
+        if (cursor.moveToFirst()) {
+            name = cursor.get(LinkContactService.CONTACT);
+            cursor.close();
+
+            selectContact.setText(name);
         }
     }
 
     @Override
     public String writeToModel(Task task) {
-        task.setValue(Task.LINKED_CONTACT, name);
+        if (name == null) return null;
+
+        contactService.synchronizeContact(task.getId(), name);
         return name;
     }
 }
