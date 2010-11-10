@@ -460,10 +460,10 @@
     </receiver>    
     
     <!-- Call Astrid! -->
-     <receiver android:name="at.tomtasche.astrid.link.contact.LinkContactActionExposer">
+     <receiver android:name="org.weloveastrid.contacts.LinkContactActionExposer">
       <intent-filter>
         <action android:name="com.todoroo.astrid.REQUEST_ACTIONS" />
-        <action android:name="at.tomtasche.astrid.link.contact.CONTACT_BUTTON" />
+        <action android:name="org.weloveastrid.contacts.CONTACT_BUTTON" />
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </receiver>

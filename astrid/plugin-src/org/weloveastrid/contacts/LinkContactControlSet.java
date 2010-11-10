@@ -1,4 +1,4 @@
-package at.tomtasche.astrid.link.contact;
+package org.weloveastrid.contacts;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.timsu.astrid.R;
-import com.todoroo.andlib.data.TodorooCursor;
 import com.todoroo.andlib.service.DependencyInjectionService;
 import com.todoroo.astrid.activity.TaskEditActivity;
 import com.todoroo.astrid.activity.TaskEditActivity.TaskEditControlSet;
-import com.todoroo.astrid.data.Metadata;
 import com.todoroo.astrid.data.Task;
 
 @SuppressWarnings("deprecation")
@@ -47,15 +45,9 @@ public class LinkContactControlSet implements TaskEditControlSet {
 
     @Override
     public void readFromTask(Task task) {
-        TodorooCursor<Metadata> cursor = contactService.getContact(task.getId());
-        if (cursor == null) return;
-
-        if (cursor.moveToFirst()) {
-            name = cursor.get(LinkContactService.CONTACT);
-            cursor.close();
-
+        name = contactService.getContact(task.getId());
+        if(name != null)
             selectContact.setText(name);
-        }
     }
 
     @Override

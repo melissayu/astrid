@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.weloveastrid.contacts.LinkContactControlSet;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -64,7 +66,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import at.tomtasche.astrid.link.contact.LinkContactControlSet;
 
 import com.timsu.astrid.R;
 import com.todoroo.andlib.data.Property.StringProperty;

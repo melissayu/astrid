@@ -1,7 +1,7 @@
 /**
  * See the file "LICENSE" for the full license governing this code.
  */
-package at.tomtasche.astrid.link.contact;
+package org.weloveastrid.contacts;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -12,12 +12,10 @@ import android.net.Uri;
 import android.provider.Contacts.People;
 
 import com.timsu.astrid.R;
-import com.todoroo.andlib.data.TodorooCursor;
 import com.todoroo.astrid.api.AstridApiConstants;
 import com.todoroo.astrid.api.TaskAction;
 import com.todoroo.astrid.api.TaskDecoration;
 import com.todoroo.astrid.core.PluginServices;
-import com.todoroo.astrid.data.Metadata;
 
 /**
  * Exposes {@link TaskDecoration} for linked contacts
@@ -28,7 +26,7 @@ import com.todoroo.astrid.data.Metadata;
 @SuppressWarnings("deprecation")
 public class LinkContactActionExposer extends BroadcastReceiver {
 
-    private static final String CONTACT_ACTION = "at.tomtasche.astrid.link.contact.CONTACT_BUTTON"; //$NON-NLS-1$
+    private static final String CONTACT_ACTION = "org.weloveastrid.contacts.CONTACT_BUTTON"; //$NON-NLS-1$
 
     private String name;
 
@@ -42,20 +40,9 @@ public class LinkContactActionExposer extends BroadcastReceiver {
             return;
 
         // check if there's already contact selected
-        TodorooCursor<Metadata> cursor = LinkContactService.getInstance().getContact(taskId);
-        if (cursor == null) return;
-
-        if (cursor.moveToFirst()) {
-            name = cursor.get(LinkContactService.CONTACT);
-
-            // no? then do nothing.
-            if (name == null) return;
-
-            cursor.close();
-        } else {
-            cursor.close();
+        name = LinkContactService.getInstance().getContact(taskId);
+        if(name == null)
             return;
-        }
 
         // seems like we found a selected contact in metadata. go on. :)
 

@@ -1,7 +1,7 @@
 /**
  * See the file "LICENSE" for the full license governing this code.
  */
-package at.tomtasche.astrid.link.contact;
+package org.weloveastrid.contacts;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
