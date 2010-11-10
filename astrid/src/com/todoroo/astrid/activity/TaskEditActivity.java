@@ -423,7 +423,7 @@ public final class TaskEditActivity extends TabActivity {
         if (requestCode == REQUEST_CODE_CALL_ASTRID && data != null) {
             // ((CallAstridControlSet) controls.get(0)).contactSelected(data);
             for (TaskEditControlSet controlSet : controls) {
-                if (LinkContactControlSet.class.isInstance(controlSet)) {
+                if (controlSet instanceof LinkContactControlSet) {
                     ((LinkContactControlSet) controlSet).contactSelected(data);
                 }
             }

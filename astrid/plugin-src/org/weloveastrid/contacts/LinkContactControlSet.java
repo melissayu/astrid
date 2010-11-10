@@ -15,7 +15,6 @@ import com.todoroo.astrid.activity.TaskEditActivity;
 import com.todoroo.astrid.activity.TaskEditActivity.TaskEditControlSet;
 import com.todoroo.astrid.data.Task;
 
-@SuppressWarnings("deprecation")
 public class LinkContactControlSet implements TaskEditControlSet {
     private final Button selectContact;
     private String name;
