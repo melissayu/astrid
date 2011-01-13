@@ -932,7 +932,7 @@ public class TaskAdapter extends CursorAdapter implements Filterable {
         private void prepareQuickActionBar(ViewHolder viewHolder, Collection<TaskAction> collection){
 
             mBar = new QuickActionBar(viewHolder.view.getContext());
-            QuickAction editAction = new QuickAction(viewHolder.view.getContext(), R.drawable.tango_edit, "   Edit   ");
+            QuickAction editAction = new QuickAction(activity, R.drawable.tango_edit, "   Edit   ");
             mBar.addQuickAction(editAction);
 
 
